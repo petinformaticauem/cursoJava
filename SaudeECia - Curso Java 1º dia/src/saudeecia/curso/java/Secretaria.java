@@ -2,22 +2,13 @@ package saudeecia.curso.java;
 
 import java.util.Scanner;
 
-public class Secretaria {
-    String nome;
-    String cpf;
-    String email;
-    String dataNasc;
-    String endereco;
+public class Secretaria extends Pessoa{
 
-    Secretaria(String nome, String cpf, String email, String dataNasc, String endereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.dataNasc = dataNasc;
-        this.endereco = endereco;
+    public Secretaria(String nome, String cpf, String email, String dataNasc, String endereco) {
+        super(nome, cpf, email, dataNasc, endereco);
     } 
     
-    void criarPaciente(){
+    private void criarPaciente(){
         Scanner entrada = new Scanner(System.in);
         String nomePaciente, enderecoPaciente, cpfPaciente, emailPaciente, dataNascPaciente;
 
@@ -39,7 +30,7 @@ public class Secretaria {
         Paciente paciente = new Paciente(nomePaciente, cpfPaciente, emailPaciente, dataNascPaciente, enderecoPaciente);
     }
     
-    void criarConsulta(Medico medico, Paciente paciente, String data, String hora){
+    private void criarConsulta(Medico medico, Paciente paciente, String data, String hora){
         Consulta consulta = new Consulta(data, hora, medico, paciente);
     }
 }

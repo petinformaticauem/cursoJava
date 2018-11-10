@@ -1,19 +1,12 @@
 package saudeecia.curso.java;
 
-public class Paciente {
-    String nome;
-    String cpf;
-    String email;
-    String dataNasc;
-    String endereco;
+public class Paciente extends Pessoa{
     
-    Paciente(String nome, String cpf, String email, String dataNasc, String endereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.dataNasc = dataNasc;
-        this.endereco = endereco;
+    public Paciente(String nome, String cpf, String email, String dataNasc, String endereco) {
+        super(nome, cpf, email, dataNasc, endereco);
     }
     
-    Paciente(){}
+    public Paciente(){
+        super();
+    }
 }

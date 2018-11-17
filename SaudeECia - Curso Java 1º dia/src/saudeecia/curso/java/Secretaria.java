@@ -1,36 +1,66 @@
 package saudeecia.curso.java;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
-public class Secretaria extends Pessoa{
+public class Secretaria extends Pessoa {
 
-    public Secretaria(String nome, String cpf, String email, String dataNasc, String endereco) {
-        super(nome, cpf, email, dataNasc, endereco);
-    } 
-    
-    private void criarPaciente(){
-        Scanner entrada = new Scanner(System.in);
-        String nomePaciente, enderecoPaciente, cpfPaciente, emailPaciente, dataNascPaciente;
+  public static ArrayList<Paciente> pacientes = new ArrayList();
 
-        System.out.print("Digite o CPF do paciente: ");
-        cpfPaciente = entrada.nextLine();
+  public static ArrayList<Paciente> getPacientes() {
+    return pacientes;
+  }
 
-        System.out.print("Digite o nome do paciente: ");
-        nomePaciente = entrada.nextLine();
+  public static void setPacientes(ArrayList<Paciente> pacientes) {
+    Secretaria.pacientes = pacientes;
+  }
 
-        System.out.print("Digite a data de nascimento do paciente: ");
-        dataNascPaciente = entrada.nextLine();
+  public Secretaria(String nome, String cpf, String email, String dataNasc, String endereco) {
+    super(nome, cpf, email, dataNasc, endereco);
+  }
 
-        System.out.print("Digite o email do paciente: ");
-        emailPaciente = entrada.nextLine();
-        
-        System.out.print("Digite a rua do paciente: ");
-        enderecoPaciente = entrada.nextLine();
-        
-        Paciente paciente = new Paciente(nomePaciente, cpfPaciente, emailPaciente, dataNascPaciente, enderecoPaciente);
+  public void criarPaciente() {
+    Scanner entrada = new Scanner(System.in);
+    String nomePaciente, enderecoPaciente, cpfPaciente, emailPaciente, dataNascPaciente;
+
+    System.out.print("Digite o CPF do paciente: ");
+    cpfPaciente = entrada.nextLine();
+
+    System.out.print("Digite o nome do paciente: ");
+    nomePaciente = entrada.nextLine();
+
+    System.out.print("Digite a data de nascimento do paciente: ");
+    dataNascPaciente = entrada.nextLine();
+
+    System.out.print("Digite o email do paciente: ");
+    emailPaciente = entrada.nextLine();
+
+    System.out.print("Digite a rua do paciente: ");
+    enderecoPaciente = entrada.nextLine();
+
+    Paciente paciente = new Paciente(nomePaciente, cpfPaciente, emailPaciente, dataNascPaciente, enderecoPaciente);
+    Secretaria.pacientes.add(paciente);
+  }
+
+  public void criarConsulta(Medico medico, Paciente paciente, String data, String hora) {
+    Consulta consulta = new Consulta(data, hora, medico, paciente);
+    Consulta.consultas.add(consulta);
+  }
+
+  public void gerarRelatorioConsulta() {
+    String dia;
+    Calendar dataHoje = Calendar.getInstance();
+    dia = dataHoje.getTime().toString();
+
+    int numDia = Integer.parseInt(dia.substring(8, 10));
+    int diaCom;
+
+    for (int i = 0; i < Consulta.getConsultas().size(); i++) {
+      diaCom = Integer.parseInt(Consulta.getConsultas().get(i).getData().substring(0, 2));
+      if (numDia + 1 == diaCom) {
+        System.out.println("Consulta = " + Consulta.getConsultas().get(i).toString());
+      }
     }
-    
-    private void criarConsulta(Medico medico, Paciente paciente, String data, String hora){
-        Consulta consulta = new Consulta(data, hora, medico, paciente);
-    }
+  }
 }

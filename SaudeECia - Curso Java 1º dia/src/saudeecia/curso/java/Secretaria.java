@@ -1,23 +1,23 @@
 package saudeecia.curso.java;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Secretaria extends Pessoa {
 
-  public static ArrayList<Paciente> pacientes = new ArrayList();
-
-  public static ArrayList<Paciente> getPacientes() {
-    return pacientes;
-  }
-
-  public static void setPacientes(ArrayList<Paciente> pacientes) {
-    Secretaria.pacientes = pacientes;
-  }
+  public static HashMap<String, Paciente> pacientes = new HashMap();
 
   public Secretaria(String nome, String cpf, String email, String dataNasc, String endereco) {
     super(nome, cpf, email, dataNasc, endereco);
+  }
+
+  public static HashMap<String, Paciente> getPacientes() {
+    return pacientes;
+  }
+
+  public static void setPacientes(HashMap<String, Paciente> pacientes) {
+    Secretaria.pacientes = pacientes;
   }
 
   public void criarPaciente() {
@@ -40,7 +40,7 @@ public class Secretaria extends Pessoa {
     enderecoPaciente = entrada.nextLine();
 
     Paciente paciente = new Paciente(nomePaciente, cpfPaciente, emailPaciente, dataNascPaciente, enderecoPaciente);
-    Secretaria.pacientes.add(paciente);
+    Secretaria.pacientes.put(cpfPaciente, paciente);
   }
 
   public void criarConsulta(Medico medico, Paciente paciente, String data, String hora) {
